@@ -1,6 +1,6 @@
 netatmo-api-python, recurring image capture & timelapser
 ========================================================
-Built with help from the [netatmo-api-python](https://github.com/philippelt/netatmo-api-python) repo
+This repo was built and forked, based on the [netatmo-api-python](https://github.com/philippelt/netatmo-api-python) repo
 
 ### Authentication ###
 
