@@ -9,10 +9,10 @@ Make sure to create an accessible app from [Netamo's own developer platform](htt
 
 ### Usecase ###
 
-* Add client_id, client_secret, username and password of your Netamo account to the environment variables
+* Add client_id, client_secret, camera name, sleeptime, username and password of your Netamo account to the environment variables
 * If running the docker file in terminal make sure to run it with the following command 
 
-      docker run -e CLIENT_ID={$ client_id} -e CLIENT_SECRET={$ client_secret} -e USERNAME={$ username} -e PASSWORD={$ password} -e  SLEEPTIME={$ amount of seconds interval} -t -v {$ absolute path for pictures}:/pictures tordar/timelapser
+      docker run -e CLIENT_ID={$ client_id} -e CLIENT_SECRET={$ client_secret} -e MY_CAMERA={$ netatmo camera} -e USERNAME={$ username} -e PASSWORD={$ password} -e  SLEEPTIME={$ amount of seconds interval} -t -v {$ absolute path for pictures}:/pictures tordar/timelapser
 
 * Including `:/pictures` at the end of the absolute path is crucial to allow Docker to mount a volume outside of itself 
 
