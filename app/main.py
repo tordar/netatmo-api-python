@@ -840,7 +840,7 @@ def getStationMinMaxTH(station=None, module=None, home=None):
 
 def main():
 
-    MY_CAMERA = "Kamera"
+    MY_CAMERA = os.environ['MY_CAMERA']
     SLEEPTIME = int(os.environ['SLEEPTIME'])
     # CLIENT_ID = os.environ['CLIENT_ID']
     # CLIENT_SECRET = os.environ['CLIENT_SECRET']
