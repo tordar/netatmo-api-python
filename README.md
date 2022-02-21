@@ -1,36 +1,21 @@
-netatmo-api-python
-==================
+netatmo-api-python, recurring image capture & timelapser
+========================================================
+Built with help from the [netatmo-api-python](https://github.com/philippelt/netatmo-api-python) repo
 
-Simple API to access Netatmo weather station data from any python script
-For more detailed information see http://dev.netatmo.com
+### Authentication ###
 
-I have no relation with the netatmo company, I wrote this because I needed it myself,
-and published it to save time to anyone who would have same needs.
-
-Following the implementation of "Home" everywhere in the Netatmo API with various behavior, the library has been adjusted to include the home parameters in most calls.
-If you are using a single account with a single home and single weather station, the library has been implemented so that your code should continue to run without change.
-
-If you have multiple homes or were supplying a station name in some method calls, you will have to adapt your code :
- - to supply a home name when looking for data for most class initializers
- - to use the new station name set by Netatmo (which is not your previously set value)
+Make sure to create an accessible app from [Netamo's own developer platform](https://dev.netatmo.com/apps/createanapp), to receieve a clientId, and clientSecret to access their API. Fill in the necessary information in the lnetamo.py file.
 
 
-### Install ###
+### Usecase ###
 
-To install lnetatmo simply run:
+* Add client_id, client_secret, username and password of your Netamo account to the environment variables
+* If running the docker file in terminal make sure to run it with the following command 
 
-    python setup.py install
+      docker run -e CLIENT_ID={$ client_id} -e CLIENT_SECRET={$ client_secret} -e USERNAME={$ username} -e PASSWORD={$ password} -e  SLEEPTIME={$ amount of seconds interval} -t -v {$ absolute path for pictures}:/pictures tordar/timelapser
 
-  or
+* Including `:/pictures` at the end of the absolute path is crucial to allow Docker to mount a volume outside of itself 
 
-    pip install lnetatmo
+* If running this in a seperate docker container, [pull the image](https://hub.docker.com/r/tordar/timelapser) from Docker Hub with following command:
 
-Depending on your permissions you might be required to use sudo.
-
-It is a single file module, on platforms where you have limited access, you just have to clone the repo and take the lnetatmo.py in the same directory than your main program.
-
-Once installed you can simple add lnetatmo to your python scripts by including:
-
-    import lnetatmo
-
-For documentation, see usage
+      docker pull tordar/timelapser
