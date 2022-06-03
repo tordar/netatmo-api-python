@@ -21,6 +21,8 @@ import json, time
 import imghdr
 import warnings
 import logging
+import http
+import urllib
 
 
 # Just in case method could change
@@ -739,9 +741,18 @@ class HomeData:
         self.rawData = resp['body']
 
     def getLiveSnapshot(self, camera=None, home=None, cid=None):
-        camera = self.cameraByName(home=home, camera=camera) or self.cameraById(cid=cid)
-        vpnUrl, localUrl = self.cameraUrls(cid=camera["id"])
+        try:
+            camera = self.cameraByName(home=home, camera=camera) or self.cameraById(cid=cid)
+            vpnUrl, localUrl = self.cameraUrls(cid=camera["id"])
+        
+        except urllib.error.HTTPError as e:
+            if e.code:
+                print("here is the error")
+                time.sleep(30)
+        
+        print(localUrl or vpnUrl)
         url = localUrl or vpnUrl
+        
         return cameraCommand(url, _PRES_CDE_GET_SNAP)
 
 
@@ -862,13 +873,23 @@ def main():
     while True:
         now = datetime.now().strftime('%Y-%m-%d-%H.%M.%S')
         # Request snapshot
-        snapshot = homeData.getLiveSnapshot(camera=MY_CAMERA)
-        if not snapshot:
-            print("No camera available")
-            exit(1)
-        with open(PATH + str(now) + ".jpg", "wb") as f: f.write(snapshot)
-        print("Picture has been taken " + now)
-        time.sleep(SLEEPTIME)
+        try:
+            snapshot = homeData.getLiveSnapshot(camera=MY_CAMERA)
+            with open(PATH + str(now) + ".jpg", "wb") as f: f.write(snapshot)
+            print("Picture has been taken " + now)
+            time.sleep(SLEEPTIME)
+        except urllib.error.HTTPError as e:
+            if e.code == 403:
+                time.sleep(30)
+        finally:
+            print("everthing is wrong maybe")
+            time.sleep(30)
+        
+
+        # if not snapshot:
+        #     print("No camera available")
+        #     exit(1)
+        
 
 
     # Optional timelapse function commented out (requires ffmpeg to be installed)

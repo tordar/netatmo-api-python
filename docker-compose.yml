@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  netatmoapipython:
+    image: netatmoapipython
+    build:
+      context: .
+      dockerfile: ./Dockerfile
