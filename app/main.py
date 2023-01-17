@@ -860,6 +860,7 @@ def main():
     homeData = HomeData(authorization)
 
     while True:
+        time.sleep(5)
         now = datetime.now().strftime('%Y-%m-%d-%H.%M.%S')
         # Request snapshot
         snapshot = homeData.getLiveSnapshot(camera=MY_CAMERA)
