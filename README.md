@@ -19,3 +19,7 @@ Make sure to create an accessible app from [Netamo's own developer platform](htt
 * If running this in a seperate docker container, [pull the image](https://hub.docker.com/r/tordar/timelapser) from Docker Hub with following command:
 
       docker pull tordar/timelapser
+
+### Update 23.01.2023 ###
+
+* Trying to update the image on Docker Hub, there was an issue when trying to run the container on different platform than where it was created (Built on Arm, attempted to run on AMD). The solution for this was to build a [multiplatform image](https://docs.docker.com/build/building/multi-platform/).

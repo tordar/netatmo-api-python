@@ -869,9 +869,8 @@ def main():
 
     authorization = ClientAuth()
     homeData = HomeData(authorization)
-
+    pictureCount = 0
     while True:
-        time.sleep(5)
         now = datetime.now().strftime('%Y-%m-%d-%H.%M.%S')
         # Request snapshot
         try:
@@ -883,8 +882,8 @@ def main():
             if e.code == 403:
                 time.sleep(30)
         finally:
-            print("everthing is wrong maybe")
-            time.sleep(30)
+            pictureCount + 1
+            print("Picture number: " + pictureCount)
         
 
         # if not snapshot:
