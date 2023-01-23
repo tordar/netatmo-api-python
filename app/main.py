@@ -882,8 +882,8 @@ def main():
             if e.code == 403:
                 time.sleep(30)
         finally:
-            pictureCount + 1
-            print("Picture number: " + pictureCount)
+            pictureCount += 1
+            print("Picture number: " + str(pictureCount))
         
 
         # if not snapshot:
